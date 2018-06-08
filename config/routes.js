@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/usersController');
-const drinksController = require('../controllers/postsController');
+const usersController = require('../controllers/usersController');
+const postsController = require('../controllers/postsController');
 
 // User Routes
 //index for all users
