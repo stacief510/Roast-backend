@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 const myRoutes = require('./config/routes');
+const passport = require('passport');
 
 app.use(express.static('public'));
 
@@ -15,10 +17,23 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.get('/', function(req, res) {
 	res.send('Server is working...');
 });
+
+// DB Config
+const db = require('./config/keys').mongoURI;
+
+// Connect to MongoDB (using mLab)
+mongoose.connect(db)
+  .then((() => console.log('MongoDB connected...')))
+  .catch(err => console.log(err));
+
+// Passport Middleware
+app.use(passport.initialize());
+
+// Passport JWT Config
+require('./config/passport')(passport);
 
 app.use(myRoutes);
 
