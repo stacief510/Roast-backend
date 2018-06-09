@@ -30,13 +30,20 @@ function show(req,res){
 }
 
 function userDrinks(req,res){
-    console.log('GET user and drinks')
+    console.log('GET user and posts')
     console.log(`req.params.id: ${req.params.user_id}`);
-    db.Drink
-        .find({user_id: req.params.user_id},function (err, drinks) {
-            console.log(drinks);
-            res.json(drinks);
+    db.Post
+        .find({user_id: req.params.user_id},function (err, posts) {
+            console.log(posts);
+            res.json(posts);
         })
+}
+
+function update(req, res) {
+	User.findByIdAndUpdate(req.params.user_id, {$set: req.body}, function(err, updatedUser) {
+		if (err) res.send('User update controller err: ', err);
+		res.json(updatedUser);
+	})
 }
 
 function destroy(req, res) {
@@ -51,6 +58,7 @@ module.exports = {
     index: index,
     create: create,
     show: show,
+    update: update,
     destroy: destroy,
     userDrinks: userDrinks
 }
