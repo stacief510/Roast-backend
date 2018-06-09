@@ -11,7 +11,7 @@ router.post('/users', usersController.create);
 //show a user
 router.get('/users/:user_id', usersController.show);
 //edit a user
-router.put('/users/:user_id', usersController.update);
+// router.put('/users/:user_id', usersController.update);
 //delete a user
 router.delete('/users/:user_id', usersController.destroy);
 //show all users drinks
