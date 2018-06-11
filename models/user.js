@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Post = require('./post');
 
 // User Schema
 const UserSchema = new Schema({
@@ -25,6 +26,10 @@ const UserSchema = new Schema({
   current_city: {
     type: String,
   },
+  posts: {
+    type: [Post.Schema],
+		ref: 'Post'
+  }
   
 });
 

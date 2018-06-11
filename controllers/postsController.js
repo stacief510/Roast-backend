@@ -20,9 +20,9 @@ function create(req, res){
 				if (err) console.log(err);
 				else {
 					console.log(`44444 req.params.id: ${req.params.user_id}`);
-					console.log('new post userid here', newPost.user_id)
-					// newPost.user_id.push(userSuccess._id);
-					// userSuccess.save();
+					newPost.user_id = req.params.user_id;
+					console.log('new post userid here', newPost.user_id);
+					newPost.save();
 					res.json(newPost);
 				}
 			});
