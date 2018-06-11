@@ -43,8 +43,8 @@ var posts = [
   }
 ]
 
-var users=[{name: "Stacie", email:"sf@ga.co", password: "1234", current_city: "Danville, CA", user_photo: "https://avatars0.githubusercontent.com/u/25073116?s=460&v=4"},
-    {name: "Joe", email:"joe@ga.co", password: "123", current_city: "San Francisco, CA", user_photo: "https://unsplash.com/photos/f5_eOC2FDwk"}];
+var users=[{name: "Stacie", email:"sf@ga.co", password: "1234", current_city: "Danville, CA"},
+    {name: "Joe", email:"joe@ga.co", password: "123", current_city: "San Francisco, CA"}];
 
 db.User.remove({}, function(err, removedUsers){
     db.User.create(users, function(err, createdUsers){

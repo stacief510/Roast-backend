@@ -4,7 +4,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const keys = require('../config/keys');
+const keys = require('./keys');
 const usersController = require('../controllers/usersController');
 const postsController = require('../controllers/postsController');
 
@@ -14,27 +14,27 @@ router.get('/users', usersController.index);
 //post/create a new users
 router.post('/users', usersController.create);
 //show a user
-router.get('/users/:user_id', usersController.show);
+router.get('/users/:user_id', passport.authenticate('jwt', { session: false }), usersController.show);
 //edit a user
-router.put('/users/:user_id', usersController.update);
+router.put('/users/:user_id', passport.authenticate('jwt', { session: false }), usersController.update);
 //delete a user
 router.delete('/users/:user_id', usersController.destroy);
 //show all users drinks
-router.get('/users/:user_id/drinks', usersController.userDrinks);
+router.get('/users/:user_id/drinks', passport.authenticate('jwt', { session: false }), usersController.userDrinks);
 
 
 //index for all drinks
-router.get('/drinks', postsController.index);
+router.get('/drinks', passport.authenticate('jwt', { session: false }), postsController.index);
 //post for drinks
-router.post('/users/:user_id/drinks', postsController.create);
+router.post('/users/:user_id/drinks', passport.authenticate('jwt', { session: false }), postsController.create);
 //delete drinks (aka review)
-router.delete('/users/:user_id/drinks/:drink_id', postsController.destroy);
+router.delete('/users/:user_id/drinks/:drink_id', passport.authenticate('jwt', { session: false }), postsController.destroy);
 //show for one drink
-router.get('/users/:user_id/drinks/:drink_id', postsController.show);
+router.get('/users/:user_id/drinks/:drink_id', passport.authenticate('jwt', { session: false }), postsController.show);
 //update a review (aka drink)
-router.put('/users/:user_id/drinks/:drink_id', postsController.update);
+router.put('/users/:user_id/drinks/:drink_id', passport.authenticate('jwt', { session: false }), postsController.update);
 
-// GET api/users/test (Public)
+// GET /test (Public)
 router.get('/test', (req, res) => res.json({msg: 'Users Endpoint Ok'}));
 
 // GET api/users/register (Public)
@@ -58,6 +58,7 @@ router.post('/register', (req, res) => {
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
+          current_city: req.body.current_city,
           avatar,
           password: req.body.password,
         });
