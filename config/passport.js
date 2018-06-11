@@ -5,7 +5,7 @@ const User = mongoose.model('user');
 const keys = require('./keys');
 
 const opts= {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken(); 
 opts.secretOrKey = keys.secretOrKey;
 
 module.exports = passport => {
@@ -20,6 +20,6 @@ module.exports = passport => {
         // If no user is found
         return done(null, false)
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log('not good', err));
   }));
 };

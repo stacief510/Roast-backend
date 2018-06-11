@@ -15,9 +15,18 @@ function create(req, res){
 	db.Post.create(req.body, function(err, newPost){
 		if(err){
 			res.send(err);
+		}else{
+			db.User.findById(req.params.user_id, function(err, userSuccess) {
+				if (err) console.log(err);
+				else {
+					console.log(`44444 req.params.id: ${req.params.user_id}`);
+					console.log('new post userid here', newPost.user_id)
+					// newPost.user_id.push(userSuccess._id);
+					// userSuccess.save();
+					res.json(newPost);
+				}
+			});
 		}
-		res.json(newPost);
-		console.log("333 this is a new drink", newPost)
 	});
 }
 
@@ -36,7 +45,7 @@ function update(req, res){
 		if (err) {
             console.log(err);
         } else {
-			foundPost.name = req.body.name;
+			foundPost.drink = req.body.drink;
             foundPost.store = req.body.store;
 			foundPost.review_title = req.body.review_title;
 			foundPost.review = req.body.review;
